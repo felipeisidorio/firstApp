@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Seleções</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngFor="let selecao of selecoes">
+        <ion-item>
+            <ion-avatar item-start>
+                <img [src]="selecao.flag">
+            </ion-avatar>
+            <h2>{{selecao.name}}</h2>
+            <p>{{selecao.fifaCode}}</p>
+        </ion-item>
+        <ion-item>
+            <img [src]="selecao.flag">
+        </ion-item>
+        <ion-card>
+            <ion-card-header text-center>
+                Team
+            </ion-card-header>
+            <ion-card-content class="team-card">
+                <p class="p" *ngFor="let convocado of convocados">
+                    {{convocado.Number}} - {{convocado.Name | lowercase}}
+                </p>
+                <!-- <p>Coach: Felipe</p> -->
+            </ion-card-content>
+        </ion-card>
+    </ion-card>
+</ion-content>

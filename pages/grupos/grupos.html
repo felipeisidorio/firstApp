@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+  <ion-icon name="menu"></ion-icon>
+</button>
+        <ion-title>Groups</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
+    <ion-list>
+        <ion-card *ngFor="let grupo of grupos">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row text-center>
+                        <ion-col>{{grupo.name}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                        </ion-col>
+                        <ion-col col-6>
+                            Teams
+                        </ion-col>
+                        <ion-col>
+                            Pts
+                        </ion-col>
+                        <ion-col>
+                            Jgs
+                        </ion-col>
+                        <ion-col>
+                            SG
+                        </ion-col>
+
+                    </ion-row>
+                    <ion-row *ngFor="let selecao of grupo.selecoes">
+                        <ion-col>
+                            {{selecao.posicao}}
+                        </ion-col>
+                        <ion-col col-6>
+                            <a (click)="openTela(selecao.nome)" [ngStyle]="{'color': condition(selecao.posicao)? 'primary' : 'red'}"> {{selecao.nome }} </a>
+                        </ion-col>
+                        <ion-col>
+                            {{selecao.pontos}}
+                        </ion-col>
+                        <ion-col>
+                            {{selecao.jogos}}
+                        </ion-col>
+                        <ion-col>
+                            {{selecao.saldoGols}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+</ion-content>

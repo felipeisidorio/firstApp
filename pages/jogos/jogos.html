@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+        <ion-title>Matches</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <ion-slides pager>
+            <ion-slide *ngFor="let fase of jogosFinais ">
+                <ion-card>
+                    <ion-card-header>
+                        {{fase.fase}}
+                    </ion-card-header>
+                </ion-card>
+                <ion-card *ngFor=" let jogo of fase.jogosFase " class="marginB">
+                    <ion-card-header text-center>
+                        <p>
+                            Match {{jogo.name}}
+                        </p>
+                        <p>
+                            {{jogo.dt_hr_partida | date: 'EEE dd/MM/yyyy HH:mm'}} {{jogo.local}}
+                        </p>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item text-center>
+                            <ion-avatar item-start (click)="openTelaSelecoes(jogo.mandante) ">
+                                <img [src]="jogo.ico_mandante " />
+                            </ion-avatar>
+                            <h2>
+                                {{jogo.mandanteCode}} {{jogo.placar_mandante}} X {{jogo.placar_visitante}} {{jogo.visitanteCode}}
+                            </h2>
+                            <ion-avatar item-end>
+                                <img [src]="jogo.ico_visitante " (click)="openTelaSelecoes(jogo.visitante) ">
+                            </ion-avatar>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-list>
+    <ion-list>
+        <ion-slides *ngFor="let grupo of jogosGrupos" pager>
+            <ion-slide *ngFor="let rodada of grupo.rodadas">
+                <ion-card>
+                    <ion-card-header>
+                        {{rodada.jogo1.fase}} {{rodada.name}}° Rodada
+                    </ion-card-header>
+                </ion-card>
+                <ion-card>
+                    <ion-card-header text-center>
+                        <p>
+                            {{rodada.jogo1.dt_hr_partida | date: 'EEE dd/MM/yyyy HH:mm'}} {{rodada.jogo1.local}}
+                        </p>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item text-center>
+                            <ion-avatar item-start (click)=" openTelaSelecoes(rodada.jogo1.mandante) ">
+                                <img [src]="rodada.jogo1.ico_mandante " />
+                            </ion-avatar>
+                            <h2>
+                                {{rodada.jogo1.mandanteCode}} {{rodada.jogo1.placar_mandante}} X {{rodada.jogo1.placar_visitante}} {{rodada.jogo1.visitanteCode}}
+                            </h2>
+                            <ion-avatar item-end>
+                                <img [src]="rodada.jogo1.ico_visitante " (click)="openTelaSelecoes(rodada.jogo1.visitante) ">
+                            </ion-avatar>
+                        </ion-item>
+                    </ion-card-content>
+                    <hr/>
+                    <ion-card-header text-center>
+                        <p>{{rodada.jogo2.dt_hr_partida | date: 'EEE dd/MM/yyyy HH:mm'}} {{rodada.jogo2.local}}</p>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item text-center>
+                            <ion-avatar item-start (click)="openTelaSelecoes(rodada.jogo2.mandante) ">
+                                <img [src]="rodada.jogo2.ico_mandante " />
+                            </ion-avatar>
+                            <h2>
+                                {{rodada.jogo2.mandanteCode}} {{rodada.jogo2.placar_mandante}} X {{rodada.jogo2.placar_visitante}} {{rodada.jogo2.visitanteCode}}
+                            </h2>
+                            <ion-avatar item-end>
+                                <img [src]="rodada.jogo2.ico_visitante " (click)="openTelaSelecoes(rodada.jogo2.visitante) ">
+                            </ion-avatar>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-list>
+
+</ion-content>

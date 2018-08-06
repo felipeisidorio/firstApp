@@ -1,0 +1,22 @@
+page-selecoes {
+    img {
+        border: 1px solid;
+        border-color: lightgrey;
+    }
+    ion-item {
+        padding: 2px;
+    }
+    ion-content {
+        background-image: url('../assets/imgs/russia.jpg');
+        background-repeat: repeat;
+        background-size: 100px 70px;
+    }
+    .team-card {
+        column-width: 100px;
+        column-count: 2;
+    }
+    .p {
+        text-transform: capitalize;
+        font-size: 12px;
+    }
+}

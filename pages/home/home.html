@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+  <ion-icon name="menu"></ion-icon>
+</button>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-card>
+        <ion-card-header text-center>
+            <h1>Jogos de Hoje</h1>
+        </ion-card-header>
+    </ion-card>
+    <ion-list>
+        <ion-slides *ngFor="let grupo of jogosDay ">
+
+
+            <ion-slide *ngFor="let rodada of grupo.rodadas">
+                <ion-card>
+                    <ion-card-header text-center>
+                        <h2> {{grupo.name}} </h2>
+                    </ion-card-header>
+                </ion-card>
+                <!-- <ion-card *ngFor="let jogo of rodada.jogos"> -->
+                <ion-card>
+                    <ion-item *ngFor="let jogo of rodada.jogos">
+
+
+                        <ion-card-header text-center>
+
+                            <p>
+                                {{jogo.dt_hr_partida | date: 'EEE dd/MM/yyyy HH:mm'}} {{jogo.local}}
+                            </p>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-item text-center>
+                                <ion-avatar item-start (click)=" openTelaSelecoes(jogo.mandante) ">
+                                    <img [src]="jogo.ico_mandante " />
+                                </ion-avatar>
+                                <h2>
+                                    {{jogo.mandanteCode}} {{jogo.placar_mandante}} X {{jogo.placar_visitante}} {{jogo.visitanteCode}}
+                                </h2>
+                                <ion-avatar item-end>
+                                    <img [src]="jogo.ico_visitante " (click)="openTelaSelecoes(jogo.visitante) ">
+                                </ion-avatar>
+                            </ion-item>
+
+                        </ion-card-content>
+                    </ion-item>
+
+
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-list>
+    <ion-list>
+        <ion-slides>
+            <ion-slide *ngFor="let fase of jogosDay ">
+
+                <ion-card *ngFor=" let jogo of fase.jogosFase " class="marginB">
+                    <ion-card-header text-center>
+                        <p>
+                            {{jogo.fase}}
+                        </p>
+                        <p>
+                            {{jogo.dt_hr_partida | date: 'EEE dd/MM/yyyy HH:mm'}} {{jogo.local}}
+                        </p>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item text-center>
+                            <ion-avatar item-start (click)="openTelaSelecoes(jogo.mandante) ">
+                                <img [src]="jogo.ico_mandante " />
+                            </ion-avatar>
+                            <h2>
+                                {{jogo.mandanteCode}} {{jogo.placar_mandante}} X {{jogo.placar_visitante}} {{jogo.visitanteCode}}
+                            </h2>
+                            <ion-avatar item-end>
+                                <img [src]="jogo.ico_visitante " (click)="openTelaSelecoes(jogo.visitante) ">
+                            </ion-avatar>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-list>
+    <ion-card *ngIf="msg">
+        <ion-card-content text-center>
+            <p>{{msg}}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
